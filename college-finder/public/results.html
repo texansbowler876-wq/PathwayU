@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your College Recommendations - PathwayU</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>PathwayU</h1>
+            <p class="tagline">Your Personalized Recommendations</p>
+        </header>
+
+        <!-- Results Container -->
+        <div id="resultsContainer" class="results-container">
+            <div class="results-header">
+                <h2>Your Top 5 College Matches</h2>
+                <p>Based on your preferences, here are the best colleges for you:</p>
+            </div>
+
+            <!-- Top 5 Colleges -->
+            <div id="topFive" class="top-five"></div>
+
+            <!-- Honorable Mentions -->
+            <div class="honorable-mentions">
+                <h3>Honorable Mentions</h3>
+                <p>These colleges also matched your preferences:</p>
+                <ul id="honorableMentions" class="mentions-list"></ul>
+            </div>
+
+            <!-- Actions -->
+            <div class="results-actions">
+                <button id="startOverBtn" class="btn btn-secondary">Start Over</button>
+                <button id="shareBtn" class="btn btn-primary">Save Results</button>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="loading-screen">
+            <div class="spinner"></div>
+            <h2>Loading Your Results...</h2>
+        </div>
+
+        <!-- Error Screen -->
+        <div id="errorScreen" class="error-screen" style="display: none;">
+            <h2>Oops! Something went wrong</h2>
+            <p id="errorMessage">We couldn't load your results. Please try again.</p>
+            <button id="retryBtn" class="btn btn-primary">Go Back</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/results.js"></script>
+</body>
+</html>

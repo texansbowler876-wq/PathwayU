@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathwayU - Find Your Perfect Match</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>PathwayU</h1>
+            <p class="tagline">Discover your perfect college match in 15 questions</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-text">
+                <span id="progressText">Question 1 of 15</span>
+                <span id="progressPercent">7%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Landing Page -->
+        <div id="landingPage" class="landing-page">
+            <div class="hero">
+                <h2>Find Your Dream College</h2>
+                <p>Answer 15 personalized questions and get AI-powered recommendations tailored to your preferences.</p>
+                <button id="startQuizBtn" class="btn btn-primary btn-large">Start Quiz</button>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <h3>Personalized Matching</h3>
+                    <p>Our algorithm considers 15 key factors to find colleges that truly fit you.</p>
+                </div>
+                <div class="feature">
+                    <h3>AI-Powered Insights</h3>
+                    <p>Get detailed explanations on why each college is recommended for you.</p>
+                </div>
+                <div class="feature">
+                    <h3>Save Your Progress</h3>
+                    <p>Start anytime, save your answers, and come back when you're ready.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Container -->
+        <div id="questionContainer" class="question-container" style="display: none;">
+            <div class="question-card">
+                <h2 id="questionText" class="question-text"></h2>
+                <p id="questionHelper" class="question-helper"></p>
+
+                <!-- Input area (dynamically generated) -->
+                <div id="answerInput" class="answer-input"></div>
+
+                <!-- Navigation buttons -->
+                <div class="button-group">
+                    <button id="backBtn" class="btn btn-secondary" style="display: none;">Back</button>
+                    <button id="nextBtn" class="btn btn-primary" disabled>Next</button>
+                    <button id="submitBtn" class="btn btn-primary btn-submit" style="display: none;" disabled>Get My Recommendations</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="loading-screen" style="display: none;">
+            <div class="spinner"></div>
+            <h2>Finding Your Perfect Matches...</h2>
+            <p>Analyzing 30 colleges based on your preferences</p>
+            <p class="loading-detail">This may take 5-10 seconds</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/state-manager.js"></script>
+    <script src="js/conversation.js"></script>
+</body>
+</html>
