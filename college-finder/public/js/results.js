@@ -3,6 +3,8 @@
 // DOM Elements
 let resultsContainer, loadingScreen, errorScreen;
 let topFiveDiv, honorableMentionsUl;
+let emailInput, emailBtn, emailStatus;
+let lastResults;
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,6 +19,9 @@ function initializeElements() {
 
     topFiveDiv = document.getElementById('topFive');
     honorableMentionsUl = document.getElementById('honorableMentions');
+    emailInput = document.getElementById('emailInput');
+    emailBtn = document.getElementById('emailBtn');
+    emailStatus = document.getElementById('emailStatus');
 
     // Setup event listeners
     document.getElementById('startOverBtn').addEventListener('click', () => {
@@ -24,6 +29,9 @@ function initializeElements() {
     });
 
     document.getElementById('shareBtn').addEventListener('click', handleShare);
+    if (emailBtn) {
+        emailBtn.addEventListener('click', handleEmailResults);
+    }
 
     const retryBtn = document.getElementById('retryBtn');
     if (retryBtn) {
@@ -58,6 +66,7 @@ async function loadResults() {
 
         // Display results
         displayResults(data.results);
+        lastResults = data.results;
 
         // Hide loading, show results
         loadingScreen.style.display = 'none';
@@ -76,6 +85,51 @@ function displayResults(results) {
 
     // Display honorable mentions
     displayHonorableMentions(results.honorableMentions);
+}
+
+async function handleEmailResults() {
+    const sessionId = getSessionId();
+    const email = emailInput.value.trim();
+
+    if (!sessionId) {
+        setEmailStatus('Missing session ID. Please reload the page.', true);
+        return;
+    }
+
+    if (!email || !email.includes('@')) {
+        setEmailStatus('Please enter a valid email address.', true);
+        return;
+    }
+
+    emailBtn.disabled = true;
+    setEmailStatus('Sending...', false);
+
+    try {
+        const response = await fetch('/api/email/results', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sessionId, email })
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message || 'Failed to send email.');
+        }
+
+        setEmailStatus('Email sent. Check your inbox!', false);
+    } catch (error) {
+        console.error('Error emailing results:', error);
+        setEmailStatus(error.message || 'Failed to send email.', true);
+    } finally {
+        emailBtn.disabled = false;
+    }
+}
+
+function setEmailStatus(message, isError) {
+    if (!emailStatus) return;
+    emailStatus.textContent = message;
+    emailStatus.classList.toggle('error', Boolean(isError));
 }
 
 // Display top 5 colleges

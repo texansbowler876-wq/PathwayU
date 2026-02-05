@@ -13,10 +13,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Import routes
 const conversationRoutes = require('./routes/conversation');
 const matchingRoutes = require('./routes/matching');
+const emailRoutes = require('./routes/email');
 
 // API Routes
 app.use('/api', conversationRoutes);
 app.use('/api', matchingRoutes);
+app.use('/api/email', emailRoutes);
 
 // Serve index.html for the root route
 app.get('/', (req, res) => {
